@@ -26,10 +26,10 @@ exports.store_delete_post = asyncHandler(async(req,res,next) => {
     res.send("Not Imp-lemented: store delete post")
 });
 
-exports.store_update_get = asyncHandler(async(res,res,next) => {
+exports.store_update_get = asyncHandler(async(req,res,next) => {
     res.send("Not Implemented: store update get")
 })
 
-exports.store_update_post = asyncHandler(async(res,res,next) => {
+exports.store_update_post = asyncHandler(async(req,res,next) => {
     res.send("Not Implemented: store update post")
 })
