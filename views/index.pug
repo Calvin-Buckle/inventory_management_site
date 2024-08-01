@@ -2,4 +2,16 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to my #{title}, a very basic Inventory management website for mobile repair centers.
+
+
+  h2 Dynamic content 
+
+
+  p All items:
+
+
+  ul 
+    li #[strong Stores:] !{store_count}
+    li #[strong Devices:] !{device_count}
+    li #[strong Parts:] !{part_count}

@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+  h1 #{title}: #{store.name}
+  p= store.lifespan
+
+  p Do you really want to delete this Store?
+
+  form(method='POST', action=`delete`)
+    div.form-group
+      input#storeid.form-control(type='hidden', name='storeid', value=store._id)
+    button.btn.btn-primary(type='submit') Delete
+

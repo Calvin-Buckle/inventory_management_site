@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+
+    h1= title
+
+    p 
+        strong Model:
+        | #{device.model_name}
+
+    p 
+        strong OEM:
+        | #{device.oem}
+
+    p 
+        strong Quantity:
+        | #{device.quantity}
+
+    
+

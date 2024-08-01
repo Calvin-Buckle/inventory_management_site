@@ -35,7 +35,8 @@
     const devicedetail = { 
         oem: oem,
         model_name: model_name,
-        quantity: quantity };
+        quantity: quantity,
+        id: _id };
     
   
     const device = new Device(devicedetail);

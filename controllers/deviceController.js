@@ -1,19 +1,27 @@
 const Device = require('../models/device');
 
+
 const asyncHandler = require('express-async-handler');
 
-exports.index = asyncHandler(async(req, res, next)=> {
-    res.send('Not Implemented: site home page')
-});
 
 
-exports.device_list = asyncHandler(async (req, res, next) => {
-    res.send("Not implemented: List of all devices")
-});
 
 
-exports.device_detail = asyncHandler(async (req,res,next) => {
-    res.send(`Not Implemented: Device Details: ${req.params.id}`)
+exports.device_detail = asyncHandler(async (req, res, next) => {
+    try {
+        const device = await Device.findById(req.params.id).exec();
+        
+        if (!device) {
+            return res.status(404).send("Device not found");
+        }
+
+        res.render('device_detail', {
+            title: device.model_name,
+            device: device,  // Pass the entire device object
+        });
+    } catch (error) {
+        next(error);
+    }
 });
 
 

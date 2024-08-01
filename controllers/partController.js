@@ -3,12 +3,25 @@ const Part = require('../models/part');
 const asyncHandler = require('express-async-handler');
 
 
-exports.part_list = asyncHandler( async(req,res,next) => {
-    res.send("Not Implemented: parts list")
-});
+
 
 exports.part_detail = asyncHandler( async(req,res,next) => {
-    res.send(`Not Implemented: part details: ${req.params.id}`)
+    try{
+        const part = await Part.findById(req.params.id).exec()
+            if(!part){
+               return res.status(404).send("There are no parts")
+            }
+        res.render('part_detail',{
+            title: part.partname,
+            oem: part.oem,
+            partNumber: part.partNumber,
+            quantity: part.quantity,
+            part: part,
+        })
+    }
+    catch(error){
+        next(error)
+    }
 });
 
 exports.part_create_get = asyncHandler( async(req,res,next) => {

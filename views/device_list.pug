@@ -1,0 +1,14 @@
+extends layout 
+
+block content 
+
+    h1= title 
+    if device_list.length
+        ul
+          each device in device_list
+            li
+              a(href=`${device._id}`) #{device.oem} #{device.model_name}
+              |  (Quantity: #{device.quantity})
+              
+    else 
+        p There are no devices

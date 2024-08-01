@@ -1,0 +1,16 @@
+extends layout
+
+block content 
+
+    h1= title
+
+    if part_list.length 
+        ul 
+            each part in part_list
+                li 
+                    a(href=`parts/${part._id}`) PartNumber: #{part.partNumber}
+                    div Oem: #{part.oem} 
+                    div Quantity: (#{part.quantity})
+
+    else 
+        p There are no parts

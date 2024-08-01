@@ -1,0 +1,11 @@
+extends layout 
+
+block content 
+
+    h1= title 
+
+    if store_list.length 
+        ul 
+            each store in store_list 
+                li 
+                    a(href=`stores/${store._id}`) Store: #{store.location}

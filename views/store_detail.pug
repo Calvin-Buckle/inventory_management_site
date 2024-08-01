@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+
+    h1= title 
+
+    p 
+        strong Location:
+        | #{store.location}
+
+    hr
+    p 
+        a(href=`${store._id}/delete`) Delete Store
+
+
