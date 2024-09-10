@@ -26,8 +26,8 @@ router.get('/:id', device_controller.device_detail);
 // Part routes
 router.get('/part/create', part_controller.part_create_get);
 router.post('/part/create', part_controller.part_create_post);
-router.get('/part/:id/delete', part_controller.part_delete_get);
-router.post('/part/:id/delete', part_controller.part_delete_post);
+router.get('/parts/:id/delete', part_controller.part_delete_get);
+router.post('/parts/:id/delete', part_controller.part_delete_post);
 router.get('/part/:id/update', part_controller.part_update_get);
 router.post('/part/:id/update', part_controller.part_update_post);
 router.get('/parts/:id', part_controller.part_detail);

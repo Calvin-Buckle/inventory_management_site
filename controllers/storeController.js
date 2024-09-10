@@ -68,7 +68,7 @@ exports.store_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.store_delete_post = asyncHandler(async (req, res, next) => {
-    console.log("Received delete request for store ID:", req.body.storeid); // Debug log
+    console.log("Received delete request for store ID:", req.body.storeid); 
     const store = await Store.findById(req.body.storeid).exec();
     if (store) {
         await Store.findByIdAndDelete(req.body.storeid);

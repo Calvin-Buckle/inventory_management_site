@@ -74,11 +74,27 @@ exports.part_create_post = [
 
 
 exports.part_delete_get = asyncHandler(async(req,res,next) => {
-    res.send("Not implemented: part delete get")
+    const part = await Part.findById(req.params.id).exec()
+    if(part === null){
+        res.redirect('/catalog/parts')
+    }
+    
+        res.render('part_delete',{
+        title: 'Delete part',
+        part: part
+        })
+    
 });
 
 exports.part_delete_post = asyncHandler(async(req,res,next) => {
-    res.send("not implemeneted: part delete post")
+    console.log("Received delete request for part ID:", req.body.partid); 
+    const part = await Part.findById(req.body.partid).exec();
+    if (part) {
+        await Part.findByIdAndDelete(req.body.partid);
+        res.redirect("/catalog/parts");
+    } else {
+        res.status(404).send("Part not found");
+    }
 });
 
 exports.part_update_get = asyncHandler(async(req,res,next) => {
