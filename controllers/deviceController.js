@@ -26,7 +26,7 @@ exports.device_detail = asyncHandler(async (req, res, next) => {
 
 
 exports.device_create_get = asyncHandler(async(req,res,next) => {
-    res.send("Not implemented: Device create get")
+    res.render("device_form", {title: "Create a new Device"})
 });
 
 
