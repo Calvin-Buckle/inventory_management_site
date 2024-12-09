@@ -1,4 +1,5 @@
 const Device = require('../models/device');
+const { body, validationResult } = require('express-validator');
 
 
 const asyncHandler = require('express-async-handler');
@@ -30,9 +31,48 @@ exports.device_create_get = asyncHandler(async(req,res,next) => {
 });
 
 
-exports.device_create_post = asyncHandler(async(req,res,next) => {
-    res.send("Not implemented: Device create post")
-});
+exports.device_create_post =
+[
+    body('model', 'Must contain atleast 3 characters')
+    .trim()
+    .isLength({min: 3})
+    .escape(),
+
+    body('oem', 'Must contain atleast 3 characters')
+    .trim()
+    .isLength({min: 3})
+    .escape(),
+
+    body('quantity', 'Quantity must be a number greater than 0')
+    .isInt({gt:0}),
+
+ asyncHandler(async(req,res,next) => {
+    const errors = validationResult(req);
+
+    const device = new Device({model_name: req.body.model, oem: req.body.oem, quantity: req.body.quantity})
+    if (!errors.isEmpty()) {
+        res.render("device_form", {
+            title: "Create Device",
+            model_name: model_name,
+            oem: oem,
+            quantity: quantity,
+            errors: errors.array(),
+        });
+        return;
+    } else {
+        const deviceExists = await Device.findOne({ DeviceId: req.body.model })
+        .collation({ locale: "en", strength: 2 })
+        .exec();
+    if (deviceExists) {
+        res.redirect(deviceExists.url);
+    } else {
+        await device.save();
+        res.redirect(`/devices/${device._id}`);
+    }
+}
+    }
+)
+];
 
 
 exports.device_delete_get = asyncHandler(async(req,res,next) => {
